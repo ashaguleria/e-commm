@@ -1,6 +1,11 @@
 @extends('layouts.include')
 
 @section('content')
+<style>
+.cotainer {
+    padding: 111px;
+}
+</style>
 <main class="login-form">
     <div class="cotainer">
         <div class="row">

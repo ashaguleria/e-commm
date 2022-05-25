@@ -1,10 +1,11 @@
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 @extends('layouts.include')
-
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
@@ -17,13 +18,14 @@
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                    name="email" value="{{ old('email') }}" autocomplete="email" autofocus>
+                                <span class="text-danger">@error('email') {{$message}} @enderror</span>
 
-                                @error('email')
+                                <!-- @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
-                                @enderror
+                                @enderror -->
                             </div>
                         </div>
 
@@ -34,45 +36,45 @@
                             <div class="col-md-6">
                                 <input id="password" type="password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
-                                    required autocomplete="current-password">
-
-                                @error('password')
+                                    autocomplete="current-password">
+                                <span class="text-danger">@error('password') {{$message}} @enderror</span>
+                                <!-- @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                            </div> -->
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember"
-                                        {{ old('remember') ? 'checked' : '' }}>
+                            <div class="row mb-3">
+                                <div class="col-md-6 offset-md-4">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                            {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
-                                    </label>
+                                        <label class="form-check-label" for="remember">
+                                            {{ __('Remember Me') }}
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
+                            <div class="row mb-0">
+                                <div class="col-md-8 offset-md-4">
+                                    <button type="submit" class="btn btn-primary" id="btnsubmit">
+                                        {{ __('Login') }}
+                                    </button>
 
-                                <a class="btn btn-link" href="{{ route('ForgetPasswordGet') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                                <!-- @if (Route::has('password.update'))
+                                    <a class="btn btn-link" href="{{ route('ForgetPasswordGet') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                    <!-- @if (Route::has('password.update'))
                                 <a class="btn btn-link" href="{{ route('password.update') }}">
                                     {{ __('Forgot Your Password?') }}
                                 </a>
                                 @endif -->
+                                </div>
                             </div>
-                        </div>
                     </form>
                 </div>
             </div>
@@ -80,3 +82,19 @@
     </div>
 </div>
 @endsection
+<script>
+$(function() {
+    $("#btnSubmit").click(function() {
+        var email = $("#email").val();
+        var password = $("#password").val();
+        if (email == null | email == "") {
+            document.getElementById("emailvalidation").innerHTML = "Please enter  Email!";
+            return false
+        }
+        if (password == null | password == "") {
+            document.getElementById("passwordvalidation").innerHTML = "Please enter password!";
+            return false;
+        }
+    });
+});
+</script>
