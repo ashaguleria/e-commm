@@ -1,8 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<img class="d-block w-100" src="/uploads/products/4a242b1af58a55c62deaf5a972622909.gif" alt="First slide" height="400"
-    width="100%"><br>
+
 <div class="container">
 
     <div class="row">

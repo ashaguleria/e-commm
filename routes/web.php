@@ -1,6 +1,6 @@
 <?php
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\CustomAuthController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RelationshipController;
@@ -73,12 +73,18 @@ Route::post('/send-email', [MailController::class, 'index']);
 Route::get('create', [UserController::class, 'jquery']);
 
 //login password
-route::get('/userlogin', [CustomAuthController::class, 'userlogin']);
-route::POST('/login-user', [CustomAuthController::class, 'loginUser'])->name('login-user');
-route::get('/registration', [CustomAuthController::class, 'registration']);
-route::POST('/register-user', [CustomAuthController::class, 'registerUser'])->name('register-user');
-route::get('/forget_password', [CustomAuthController::class, 'forgetpassword']);
-route::POST('/forget_password', [CustomAuthController::class, 'resetpassword']);
+// route::get('/userlogin', [CustomAuthController::class, 'userlogin']);
+// route::POST('/login-user', [CustomAuthController::class, 'loginUser'])->name('login-user');
+// route::get('/registration', [CustomAuthController::class, 'registration']);
+// route::POST('/register-user', [CustomAuthController::class, 'registerUser'])->name('register-user');
+// route::get('/forget_password', [CustomAuthController::class, 'forgetpassword']);
+// route::POST('/forget_password', [CustomAuthController::class, 'resetpassword']);
 //Softdelete
 Route::get('softdelete', [SoftDeleteController::class, 'index'])->name('post.index');
 Route::delete('softdelete/{id}', [SoftDeleteController::class, 'delete'])->name('post.delete');
+
+// Forget Password
+Route::get('forget-password', [ForgotPasswordController::class, 'ForgetPassword'])->name('ForgetPasswordGet');
+Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('ForgetPasswordPost');
+Route::get('reset-password/{token}', [ForgotPasswordController::class, 'ResetPassword'])->name('ResetPasswordGet');
+Route::post('reset-password', [ForgotPasswordController::class, 'ResetPasswordStore'])->name('ResetPasswordPost');

@@ -76,13 +76,9 @@ class ProductController extends Controller
     }
     public function destroy($id)
     {
-        $product = Product::find($id);
-        $destination = 'uploads/products/' . $product->product_image;
-        if (File::exists($destination)) {
-            File::delete($destination);
-        }
-        $product->delete();
-        return redirect()->back()->with('status', 'delete data');
+        Product::find($id)->delete();
+        return back()->with('success', 'Post deleted successfully');
+
     }
     public function user()
     {
@@ -99,7 +95,6 @@ class ProductController extends Controller
         $product = Product::find($request->id);
         $product->status = $request->status;
         $product->save();
-
         return response()->json(['success' => 'Status change successfully.']);
     }
 

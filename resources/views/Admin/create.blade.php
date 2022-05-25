@@ -4,7 +4,6 @@
 <div class="container">
     <div class="card">
         <div class="card-header">{{ __('Add Product') }}</div>
-
         <div class="card-body">
             @if (session('status'))
             <div class="alert alert-success" role="alert">
@@ -57,4 +56,7 @@
                 </form>
 
             </div>
-            @endsection
+        </div>
+    </div>
+</div>
+@endsection

@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+<style>
+label.btn.btn-default.active.toggle-off {
+    background-color: red;
+}
+</style>
 <div class="container">
     <div class="card">
         <div class="card-header">{{ __('Dashboard') }}</div>
@@ -46,7 +51,7 @@
                         <td>{{ $item->description }}</td>
                         <td>
                             <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-toggle="toggle"
-                                data-on="Active" data-off="De-activate" {{ $item->status ? 'checked' : '' }}>
+                                data-on="Active" data-off="Deactivate" {{ $item->status ? 'checked' : '' }}>
                         </td>
                         <td>
                             <img src="{{ asset('uploads/products/'.$item->product_image) }}" width="70px" height="70px"
@@ -55,13 +60,19 @@
                         <td>
                             <a href="{{ url('edit-product/'.$item->id) }}" class="btn btn-primary btn-sm">Edit</a>
                         </td>
-                        <td>
-                            <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-danger btn-sm">Delete</a>
-                            <!-- <form action="{{ url('delete-product/'.$item->id) }}" method="POST">
+
+                        <!-- <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-danger btn-sm">Delete</a> -->
+                        <!-- <form action="{{ url('delete-product/'.$item->id) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                 </form> -->
+                        <td>
+                            <form method="POST" action="{{ url('delete-product/', $item->id) }}">
+                                @csrf
+                                <input type="hidden" name="_method" value="DELETE" />
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
                         </td>
                     </tr>
                     @endforeach
@@ -75,7 +86,7 @@
 </div>
 @endsection
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" /> -->
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script>
