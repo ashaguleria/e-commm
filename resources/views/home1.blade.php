@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h3 class="header">{{ __('Add Product') }}</h3>
+    <h3 class="header">{{ __('Categories') }}</h3>
     <div class="row">
         <div class="card-body">
             @if ($message = Session::get('success'))
@@ -12,18 +12,16 @@
             </div>
             @endif
         </div>
-        @foreach($products as $product)
+        @foreach($category as $product)
         <div class="col-sm-4">
-
-            <img src="{{ asset('uploads/products/'.$product->product_image) }}" height="250" width="250" /><br><br>
-            <div class="container">
-                <h3 class="product"> {{$product->name}}</h3>
-            </div><br>
-            <div class="container">
-
-                <span class="price"><b>Price:- {{$product->price}} Rs </b></span>
-                <p class="description"> {{$product->description}}</p>
-
+            <a href="{{url('view-category/'.$product->category)}}">
+                <img src="{{ asset('uploads/products/'.$product->image) }}" height="250" width="250" /><br><br>
+                <div class="container">
+                    <h3 class="product"> {{$product->name}}</h3>
+                    <p class="description"> {{$product->description}}</p>
+                </div><br>
+            </a>
+            <!-- <div class="container">
 
                 <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -32,12 +30,9 @@
                     <input type="hidden" value="{{ $product->price }}" name="price">
                     <input type="hidden" value="{{ $product->product_image }}" name="image">
                     <input type="hidden" value="1" name="quantity">
-
                     <button class="btn btn-success">Add To Cart</button>
                 </form><br>
-
-
-            </div>
+            </div> -->
         </div>
         @endforeach
 

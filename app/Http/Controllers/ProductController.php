@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\abc;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
@@ -15,25 +17,27 @@ class ProductController extends Controller
         $product = Product::all();
         return view('Admin.product', compact('product'));
     }
+
     public function create()
     {
-        return view('Admin.create');
+        $category = Category::all();
+        return view('Admin.create', compact('category'));
     }
+
     public function store(Request $request)
     {
         $request->validate([
+            'cat_id' => 'required',
             'name' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
             'product_image' => 'required',
-            'category' => 'required',
         ]);
-
         // dd($request->all());
         $product = new Product;
+        $product->cat_id = $request->input('cat_id');
         $product->name = $request->input('name');
         $product->price = $request->input('price');
-        $product->category = $request->input('category');
         $product->description = $request->input('description');
         if ($request->hasfile('product_image')) {
             $file = $request->file('product_image');
@@ -42,23 +46,27 @@ class ProductController extends Controller
             $file->move('uploads/products/', $filename);
             $product->product_image = $filename;
         }
-
         $product->save();
         return redirect('admin/home')->with('status', 'save data');
     }
+
     public function edit($id)
     {
         $product = Product::find($id);
         return view('Admin.edit', compact('product'));
     }
+
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'description' => 'required',
+        ]);
         $product = Product::find($id);
         $product->name = $request->input('name');
         $product->price = $request->input('price');
-        $product->category = $request->input('category');
         $product->description = $request->input('description');
-
         if ($request->hasfile('product_image')) {
             $destination = 'uploads/products/' . $product->product_image;
             if (File::exists($destination)) {
@@ -70,26 +78,32 @@ class ProductController extends Controller
             $file->move('uploads/products/', $filename);
             $product->product_image = $filename;
         }
-
         $product->update();
         return redirect('admin/home')->with('status', 'update data');
     }
+
     public function destroy($id)
     {
         Product::find($id)->delete();
         return back()->with('success', 'Post deleted successfully');
-
     }
+
     public function user()
     {
-        $user = User::all();
+        $user = DB::table('users')
+            ->select('*')
+            ->where('is_admin', '0')
+            ->orderBy('id', 'asc')
+            ->get();
         return view('Admin.user', compact('user'));
     }
+
     public function order()
     {
         $abc = abc::all();
         return view('Admin.adminorder', compact('abc'));
     }
+
     public function changeStatus(Request $request)
     {
         $product = Product::find($request->id);

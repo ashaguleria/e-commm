@@ -63,11 +63,11 @@ class ForgotPasswordController extends Controller
     public function ResetPasswordStore(Request $request)
     {
         $request->validate([
-            'email' => 'required|email|exists:users',
+
             'password' => 'required|string|min:8|confirmed',
             'password_confirmation' => 'required',
         ]);
-        $update = DB::table('users')->where(['email' => $request->email])->update(['password' => Hash::make($request->password)]);
+        $update = DB::table('users')->where(['token' => $request->token])->update(['password' => Hash::make($request->password)]);
         return redirect('/login')->with('message', 'Your password has been successfully changed!');
 
         // if (!$update) {

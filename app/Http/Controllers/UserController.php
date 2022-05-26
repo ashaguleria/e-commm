@@ -9,14 +9,20 @@ class UserController extends Controller
 {
     public function home()
     {
+        $products = Product::all();
+        return view('home', compact('products'));
+    }
 
-        $products = DB::table('products')
-            ->select('*')
-            ->where('status', '1')
-            ->orderBy('id', 'asc')
-            ->get();
+    public function viewcategory($cat_id)
+    {
+        $product = Product::find($cat_id);
+        return view('home1', compact('product'));
+    }
 
-        return view('home', ['products' => $products]);
+    public function index()
+    {
+        $products = DB::table('products')->select('*')->where('status', '1')->orderBy('id', 'asc')->get();
+        return view('homex', ['products' => $products]);
     }
 
     public function order()

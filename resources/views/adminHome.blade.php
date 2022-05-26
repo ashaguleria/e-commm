@@ -9,21 +9,16 @@ label.btn.btn-default.active.toggle-off {
 <div class="container">
     <div class="card">
         <div class="card-header">{{ __('Dashboard') }}</div>
-
         <div class="card-body">
             @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
             </div>
             @endif
-
         </div>
-
     </div>
     <a href="{{url('add-product')}}" class="btn btn-primary">Add Product</a>
     <div class="row justify-content-center">
-
-
 
         <div class="card-body">
 
@@ -31,9 +26,9 @@ label.btn.btn-default.active.toggle-off {
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>Category</th>
                         <th>Name</th>
                         <th>Price</th>
-                        <th>Category</th>
                         <th>Description</th>
                         <th>Image</th>
                         <th>Status</th>
@@ -45,37 +40,33 @@ label.btn.btn-default.active.toggle-off {
                     @foreach ($product as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
+                        <td> {{$item->category->name}}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->price }}</td>
-                        <td>{{ $item->category }}</td>
                         <td>{{ $item->description }}</td>
-                        <td>
-                            <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-toggle="toggle"
-                                data-on="Active" data-off="Deactivate" {{ $item->status ? 'checked' : '' }}>
-                        </td>
                         <td>
                             <img src="{{ asset('uploads/products/'.$item->product_image) }}" width="70px" height="70px"
                                 alt="Image">
                         </td>
                         <td>
+                            <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-toggle="toggle"
+                                data-on="Active" data-off="Deactivate" {{ $item->status ? 'checked' : '' }}>
+                        </td>
+                        <td>
                             <a href="{{ url('edit-product/'.$item->id) }}" class="btn btn-primary btn-sm">Edit</a>
                         </td>
-
-                        <!-- <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-danger btn-sm">Delete</a> -->
-                        <!-- <form action="{{ url('delete-product/'.$item->id) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                </form> -->
                         <td>
-                            <form method="POST" action="{{ url('delete-product/', $item->id) }}">
+                            <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                            <!-- <form action="{{ url('delete-product/'.$item->id) }}" method="POST">
                                 @csrf
-                                <input type="hidden" name="_method" value="DELETE" />
+                                @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
+                            </form> -->
                         </td>
+
                     </tr>
                     @endforeach
+
                 </tbody>
             </table>
 
@@ -86,7 +77,6 @@ label.btn.btn-default.active.toggle-off {
 </div>
 @endsection
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" /> -->
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script>

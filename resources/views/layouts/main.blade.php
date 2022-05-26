@@ -17,15 +17,14 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- Styles -->
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <style>
 .row {
     padding-top: 5%;
-    padding-left: 5%;
-    background-color: #dfd9d9;
+    padding-left: 10%;
     padding-bottom: 5%;
     padding-right: 5%;
 }
@@ -50,6 +49,10 @@ button.btn.btn-primary {
     margin-left: 43%;
     margin-top: -36%;
 }
+
+p.text-green-800 {
+    color: green;
+}
 </style>
 
 <body>
@@ -66,11 +69,11 @@ button.btn.btn-primary {
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-                        <a class="navbar-brand" href="{{ url('home') }}">
+                    <!-- <ul class="navbar-nav me-auto">
+                        <a class="navbar-brand" href="{{ url('/') }}">
                             Home
                         </a>
-                    </ul>
+                    </ul> -->
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <!-- Authentication Links -->
@@ -87,12 +90,9 @@ button.btn.btn-primary {
                         </li>
                         @endif
                         @else
-                        <!-- <li class="nav-item">
-                            <a class="nav-link " href="cart"><i class="fa fa-shopping-cart" aria-hidden="true"
-                                    style=color:blue;>
-                                    Cart:-{{ Cart::getTotalQuantity()}}
-                                </i></a>
-                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link " href="/"> Home</a>
+                        </li>
                         <li class=" nav-item dropdown">
 
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -105,6 +105,7 @@ button.btn.btn-primary {
                                         Cart:-{{ Cart::getTotalQuantity()}}
                                     </i>
                                 </a>
+
                                 <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}
@@ -125,7 +126,6 @@ button.btn.btn-primary {
             @yield('content')
         </main>
     </div>
-
 
 </body>
 

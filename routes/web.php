@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RelationshipController;
@@ -20,14 +21,14 @@ use Illuminate\Support\Facades\Route;
 |
  */
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 //  Auth::routes(['verify' => true]);
 Auth::routes();
 //    Admin panel
 Route::middleware(['auth'])->group(function () {
     Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-    Route::get('products', [ProductController::class, 'index']);
+    // Route::get('products', [ProductController::class, 'index']);
     Route::get('add-product', [ProductController::class, 'create']);
     Route::post('add-product', [ProductController::class, 'store']);
     Route::get('edit-product/{id}', [ProductController::class, 'edit']);
@@ -37,10 +38,18 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('user', [ProductController::class, 'user']);
     Route::get('adminorder', [ProductController::class, 'order']);
+
+    Route::Post('add-category', [CategoryController::class, 'store']);
+    Route::get('categoryproduct', [CategoryController::class, 'index']);
+    Route::post('update-product/{id}', [CategoryController::class, 'update']);
+    Route::get('delete-product/{id}', [CategoryController::class, 'destroy']);
+
 });
+
 //    user pannel
-Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('home', [UserController::class, 'home']);
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
+// Route::get('/', [UserController::class, 'home']);
+// Route::get('view-category/{cat_id}', [UserController::class, 'viewcategory']);
 
 Route::middleware(['auth'])->group(function () {
     // cart
@@ -72,13 +81,6 @@ Route::post('/send-email', [MailController::class, 'index']);
 //javascript
 Route::get('create', [UserController::class, 'jquery']);
 
-//login password
-// route::get('/userlogin', [CustomAuthController::class, 'userlogin']);
-// route::POST('/login-user', [CustomAuthController::class, 'loginUser'])->name('login-user');
-// route::get('/registration', [CustomAuthController::class, 'registration']);
-// route::POST('/register-user', [CustomAuthController::class, 'registerUser'])->name('register-user');
-// route::get('/forget_password', [CustomAuthController::class, 'forgetpassword']);
-// route::POST('/forget_password', [CustomAuthController::class, 'resetpassword']);
 //Softdelete
 Route::get('softdelete', [SoftDeleteController::class, 'index'])->name('post.index');
 Route::delete('softdelete/{id}', [SoftDeleteController::class, 'delete'])->name('post.delete');

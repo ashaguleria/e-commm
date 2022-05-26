@@ -15,13 +15,13 @@
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
 
-                    <div class="form-group mb-3">
+                    <!-- <div class="form-group mb-3">
                         <label for="email_address">E-Mail Address</label>
                         <input type="text" id="email_address" class="form-control" name="email" required autofocus>
                         @if ($errors->has('email'))
                         <span class="text-danger">{{ $errors->first('email') }}</span>
                         @endif
-                    </div>
+                    </div> -->
 
                     <div class="form-group mb-3">
                         <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>

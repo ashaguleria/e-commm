@@ -74,7 +74,7 @@
 
                 </div>
                 <div class="shoping">
-                    <a href="home" class="btn btn-warning">Continue shopping</a>
+                    <a href="/" class="btn btn-warning">Continue shopping</a>
                     <a href="stripe" class=" btn btn-success">Checkout </a>
                 </div>
 

@@ -91,9 +91,9 @@ class RegisterController extends Controller
         $user->save();
         if ($user != null) {
             signupController::sendSignupEmail($user->name, $user->email, $password);
-            return redirect()->back()->with(session()->flash('alert-success', ' your account has been created'));
+            return redirect()->back()->with('message', ' your account has been created');
         }
-        return redirect()->back()->with(session()->flash('alert-danger', ' something went wrong'));
+        return redirect()->back()->with('message', ' something went wrong');
 
     }
 }

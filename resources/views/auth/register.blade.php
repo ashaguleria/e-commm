@@ -29,6 +29,11 @@ div#namevalidation {
             </div>
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
+                @if (Session::has('message'))
+                <div class="alert alert-success" role="alert">
+                    {{ Session::get('message') }}
+                </div>
+                @endif
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}" name="regform">
                         @csrf

@@ -12,4 +12,5 @@ class tableone extends Model
     {
         return $this->belongsToMany(tabletwo::class, 'tablethree');
     }
+
 }
