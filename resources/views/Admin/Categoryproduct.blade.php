@@ -5,11 +5,14 @@ label.btn.btn-default.active.toggle-off {
     background-color: #dc3545;
 }
 </style>
-<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+
+
+
 <div class="container">
 
     <div class="card">
-        <div class="card-header">{{ __('Category') }}</div>
+        <h3 class="card-header"><b>{{ __('Category') }}</b></h3>
         <div class="card-body">
             @if (session('status'))
             <div class="alert alert-success" role="alert">
@@ -72,8 +75,8 @@ label.btn.btn-default.active.toggle-off {
                         <th>Description</th>
                         <th>Image</th>
                         <th>Status</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Action</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -90,66 +93,64 @@ label.btn.btn-default.active.toggle-off {
                             <input data-id="{{$cate->id}}" class="toggle-class" type="checkbox" data-toggle="toggle"
                                 data-on="Active" data-off="Deactivate" {{ $cate->status ? 'checked' : '' }}>
                         </td>
-                        <td> <button type="button" class="btn btn-info" data-bs-toggle="modal"
+                        <td> <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#editmodel{{$cate->id}}"> edit </button>
 
-                            <!-- edit category popup model -->
-                            <div class="modal fade" id="editmodel{{$cate->id}}" tabindex="-1"
-                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-
-                                        <div class="modal-body">
-                                            <form action="update-product/{{$cate->id}}" method="POST"
-                                                enctype="multipart/form-data">
-                                                @csrf
-
-                                                <input type="hidden" value="{{ $cate-> id}}">
-                                                <div class="form-group mb-3">
-                                                    <label for="">Category Name</label>
-                                                    <input type="text" name="name" value="{{$cate->name}}"
-                                                        class="form-control">
-                                                    <span class="text-danger">@error('name') {{$message}}
-                                                        @enderror</span><br><br>
-                                                </div>
-                                                <div class="form-group mb-3">
-                                                    <label for="">Description</label>
-                                                    <input type="text" name="description" value="{{$cate->description}}"
-                                                        class="form-control">
-                                                    <span class="text-danger">@error('description') {{$message}}
-                                                        @enderror</span><br><br>
-                                                </div>
-                                                <div class="form-group mb-3">
-                                                    <label for="">Product Image</label>
-                                                    <input type="file" name="image" class="form-control">
-                                                    <img src="{{ asset('uploads/products/'.$cate->image) }}"
-                                                        width="70px" height="70px" alt="Image">
-                                                    <span class="text-danger">@error('image') {{$message}}
-                                                        @enderror</span><br><br>
-
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-bs-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Update</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end edit popup model -->
-                        </td>
-
-                        <td>
                             <a href="{{ url('delete-product/'.$cate->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="" class="btn btn-warning btn-sm">view</a>
                         </td>
                     </tr>
+
+                    <!-- edit category popup model -->
+                    <div class="modal fade" id="editmodel{{$cate->id}}" tabindex="-1"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Add Category</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <form action="update-product/{{$cate->id}}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+
+                                        <input type="hidden" value="{{ $cate-> id}}">
+                                        <div class="form-group mb-3">
+                                            <label for="">Category Name</label>
+                                            <input type="text" name="name" value="{{$cate->name}}" class="form-control">
+                                            <span class="text-danger">@error('name') {{$message}}
+                                                @enderror</span><br><br>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="">Description</label>
+                                            <input type="text" name="description" value="{{$cate->description}}"
+                                                class="form-control">
+                                            <span class="text-danger">@error('description') {{$message}}
+                                                @enderror</span><br><br>
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="">Product Image</label>
+                                            <input type="file" name="image" class="form-control">
+                                            <img src="{{ asset('uploads/products/'.$cate->image) }}" width="70px"
+                                                height="70px" alt="Image">
+                                            <span class="text-danger">@error('image') {{$message}}
+                                                @enderror</span><br><br>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end edit popup model -->
                     @endforeach
                 </tbody>
             </table>
@@ -171,7 +172,7 @@ $(function() {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: "/Status",
+            url: '/product',
             data: {
                 'status': status,
                 'id': id
@@ -183,7 +184,7 @@ $(function() {
     })
 })
 </script>
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 $(function() {
     $("#btnSubmit").click(function() {
         var name = $("#name").val();
@@ -198,4 +199,4 @@ $(function() {
         }
     });
 });
-</script> -->
+</script>

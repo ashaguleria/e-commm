@@ -29,7 +29,7 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-    Route::get('index', [ProductController::class, 'index']);
+    // Route::get('index', [ProductController::class, 'index']);
 
     Route::get('add-product', [ProductController::class, 'create']);
     Route::post('add-product', [ProductController::class, 'store']);
@@ -47,7 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('categoryproduct', [CategoryController::class, 'index']);
     Route::post('update-product/{id}', [CategoryController::class, 'update']);
     Route::get('delete-product/{id}', [CategoryController::class, 'destroy']);
-    Route::get('Status', [CategoryControlle::class, 'status']);
+    Route::get('product', [CategoryController::class, 'status']);
 });
 
 //    user pannel

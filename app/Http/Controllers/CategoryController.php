@@ -16,13 +16,11 @@ class CategoryController extends Controller
         return view('Admin.Categoryproduct', compact('category'));
     }
     //------------------Status Check------------------------//
-    public function Status(Request $request)
+    public function status(Request $request)
     {
-        DB::table('categories')->where('id', $request->id)->update(['status' => $request->status]);
-
-        // $category = Category::find($request->id);
-        // $category->status = $request->status;
-        // $category->save();
+        $category = Category::find($request->id);
+        $category->status = $request->status;
+        $category->save();
         return response()->json(['success' => 'Status change successfully.']);
     }
     //------------------- Save Data -------------------//

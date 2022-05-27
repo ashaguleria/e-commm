@@ -8,7 +8,7 @@ label.btn.btn-default.active.toggle-off {
 </style>
 <div class="container">
     <div class="card">
-        <div class="card-header">{{ __('Product') }}</div>
+        <h3 class="card-header"><b>{{ __('Product') }}</b></h3>
         <div class="card-body">
             @if (session('status'))
             <div class="alert alert-success" role="alert">
@@ -32,8 +32,7 @@ label.btn.btn-default.active.toggle-off {
                         <th>Description</th>
                         <th>Image</th>
                         <th>Status</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,14 +53,14 @@ label.btn.btn-default.active.toggle-off {
                         </td>
                         <td>
                             <a href="{{ url('edit-product/'.$item->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                        </td>
-                        <td>
+
                             <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-danger btn-sm">Delete</a>
                             <!-- <form action="{{ url('delete-product/'.$item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form> -->
+                            <a href="" class="btn btn-warning btn-sm">View</a>
                         </td>
 
                     </tr>
