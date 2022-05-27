@@ -2,27 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\abc;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    public function home()
-    {
-        $products = Product::all();
-        return view('home', compact('products'));
-    }
+    // public function home()
+    // {
 
-    public function viewcategory($cat_id)
-    {
-        $product = Product::find($cat_id);
-        return view('home1', compact('product'));
-    }
+    //     $products = Product::all();
+    //     return view('home', compact('products'));
+    // }
 
     public function index()
     {
         $products = DB::table('products')->select('*')->where('status', '1')->orderBy('id', 'asc')->get();
-        return view('homex', ['products' => $products]);
+        return view('home', ['products' => $products]);
     }
 
     public function order()
@@ -34,7 +31,7 @@ class UserController extends Controller
         $product = Product::find($id);
         return view('User.order', compact('product'));
     }
-
+// orders save
     public function store(Request $request)
     {
         // dd($request->all());
@@ -48,9 +45,16 @@ class UserController extends Controller
         $abc->save();
         return redirect('stripe')->with('status', 'save data');
     }
-    public function jquery()
+    // public function jquery()
+    // {
+    //     return view("jquery.create");
+    // }
+
+    //get category
+    public function home1()
     {
-        return view("jquery.create");
+        $category = Category::where('status', '1')->get();
+        return view('home1', compact('category'));
     }
 
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -23,7 +24,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = DB::table('products')
+            ->select('*')
+            ->where('status', '1')
+            ->orderBy('id', 'asc')
+            ->get();
+
         return view('home', compact('products'));
     }
     public function adminHome()

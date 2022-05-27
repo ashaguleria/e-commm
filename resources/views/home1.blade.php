@@ -14,25 +14,14 @@
         </div>
         @foreach($category as $product)
         <div class="col-sm-4">
-            <a href="{{url('view-category/'.$product->category)}}">
+            <a href="{{url('view-category/'.$product->cat_id)}}">
                 <img src="{{ asset('uploads/products/'.$product->image) }}" height="250" width="250" /><br><br>
                 <div class="container">
                     <h3 class="product"> {{$product->name}}</h3>
                     <p class="description"> {{$product->description}}</p>
                 </div><br>
             </a>
-            <!-- <div class="container">
 
-                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" value="{{ $product->id }}" name="id">
-                    <input type="hidden" value="{{ $product->name }}" name="name">
-                    <input type="hidden" value="{{ $product->price }}" name="price">
-                    <input type="hidden" value="{{ $product->product_image }}" name="image">
-                    <input type="hidden" value="1" name="quantity">
-                    <button class="btn btn-success">Add To Cart</button>
-                </form><br>
-            </div> -->
         </div>
         @endforeach
 

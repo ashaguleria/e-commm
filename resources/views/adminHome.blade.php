@@ -8,7 +8,7 @@ label.btn.btn-default.active.toggle-off {
 </style>
 <div class="container">
     <div class="card">
-        <div class="card-header">{{ __('Dashboard') }}</div>
+        <div class="card-header">{{ __('Product') }}</div>
         <div class="card-body">
             @if (session('status'))
             <div class="alert alert-success" role="alert">
@@ -40,9 +40,9 @@ label.btn.btn-default.active.toggle-off {
                     @foreach ($product as $item)
                     <tr>
                         <td>{{ $item->id }}</td>
-                        <td> {{$item->category->name}}</td>
+                        <td>{{ $item->category->name }}</td>
                         <td>{{ $item->name }}</td>
-                        <td>{{ $item->price }}</td>
+                        <td>Rs {{ $item->price }} </td>
                         <td>{{ $item->description }}</td>
                         <td>
                             <img src="{{ asset('uploads/products/'.$item->product_image) }}" width="70px" height="70px"

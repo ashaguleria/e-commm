@@ -8,12 +8,24 @@ use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
+
+    //-------------- get data from database ------------//
     public function index()
     {
-        $category = Category::all();
+        $category = Category::get();
         return view('Admin.Categoryproduct', compact('category'));
     }
+    //------------------Status Check------------------------//
+    public function Status(Request $request)
+    {
+        DB::table('categories')->where('id', $request->id)->update(['status' => $request->status]);
 
+        // $category = Category::find($request->id);
+        // $category->status = $request->status;
+        // $category->save();
+        return response()->json(['success' => 'Status change successfully.']);
+    }
+    //------------------- Save Data -------------------//
     public function store(Request $request)
     {
         $request->validate([
@@ -36,6 +48,7 @@ class CategoryController extends Controller
         return redirect('categoryproduct')->with('status', 'save data');
     }
 
+    //------------------- Update data ----------------//
     public function update(Request $request)
     {
         $request->validate([
@@ -43,9 +56,7 @@ class CategoryController extends Controller
             'description' => 'required',
         ]);
         // dd($request->all());
-
         $category = Category::findOrFail($request->id);
-
         $category->name = $request->input('name');
         $category->description = $request->input('description');
         // echo "<pre>";
@@ -62,10 +73,10 @@ class CategoryController extends Controller
             $file->move('uploads/products/', $filename);
             $category->image = $filename;
         }
-
         $category->update();
         return redirect('categoryproduct')->with('status', 'update data');
     }
+    //-----------Delete---------//
     public function destroy($id)
     {
         Category::find($id)->delete();

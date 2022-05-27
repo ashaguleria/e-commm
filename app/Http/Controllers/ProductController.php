@@ -12,11 +12,15 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
-    public function index()
-    {
-        $product = Product::all();
-        return view('Admin.product', compact('product'));
-    }
+    // public function index()
+    // {
+    //     return view('index');
+    // }
+    // public function index()
+    // {
+    //     $product = Product::all();
+    //     return view('Admin.product', compact('product'));
+    // }
 
     public function create()
     {
@@ -24,6 +28,7 @@ class ProductController extends Controller
         return view('Admin.create', compact('category'));
     }
 
+    //--------------- Save products Data ---------------//
     public function store(Request $request)
     {
         $request->validate([
@@ -50,12 +55,13 @@ class ProductController extends Controller
         return redirect('admin/home')->with('status', 'save data');
     }
 
+    //------------ Get Product data by Id-------------//
     public function edit($id)
     {
         $product = Product::find($id);
         return view('Admin.edit', compact('product'));
     }
-
+    //--------------- Uplate product data--------------//
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -81,29 +87,30 @@ class ProductController extends Controller
         $product->update();
         return redirect('admin/home')->with('status', 'update data');
     }
-
+    //----------------Delete Product Data-----------//
     public function destroy($id)
     {
         Product::find($id)->delete();
         return back()->with('success', 'Post deleted successfully');
     }
-
+    //------------------Get login user ------------//
     public function user()
     {
         $user = DB::table('users')
             ->select('*')
-            ->where('is_admin', '0')
+            ->where('is_admin', 'user')
             ->orderBy('id', 'asc')
             ->get();
         return view('Admin.user', compact('user'));
     }
 
+    //--------------------Oredres-------//
     public function order()
     {
         $abc = abc::all();
         return view('Admin.adminorder', compact('abc'));
     }
-
+    //--------------Change Status---------------//
     public function changeStatus(Request $request)
     {
         $product = Product::find($request->id);

@@ -13,7 +13,7 @@
                         <th>Name</th>
                         <th>Email</th>
                         <th>User Type</th>
-                        <th>Password</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -23,7 +23,7 @@
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->is_admin }}</td>
-                        <td>{{ $item->password }}</td>
+
                     </tr>
                     @endforeach
                 </tbody>

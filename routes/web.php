@@ -26,9 +26,11 @@ Route::get('/', function () {
 //  Auth::routes(['verify' => true]);
 Auth::routes();
 //    Admin panel
+
 Route::middleware(['auth'])->group(function () {
     Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-    // Route::get('products', [ProductController::class, 'index']);
+    Route::get('index', [ProductController::class, 'index']);
+
     Route::get('add-product', [ProductController::class, 'create']);
     Route::post('add-product', [ProductController::class, 'store']);
     Route::get('edit-product/{id}', [ProductController::class, 'edit']);
@@ -37,20 +39,22 @@ Route::middleware(['auth'])->group(function () {
     Route::get('changeStatus', [ProductController::class, 'changeStatus']);
 
     Route::get('user', [ProductController::class, 'user']);
+
     Route::get('adminorder', [ProductController::class, 'order']);
 
+    //category
     Route::Post('add-category', [CategoryController::class, 'store']);
     Route::get('categoryproduct', [CategoryController::class, 'index']);
     Route::post('update-product/{id}', [CategoryController::class, 'update']);
     Route::get('delete-product/{id}', [CategoryController::class, 'destroy']);
-
+    Route::get('Status', [CategoryControlle::class, 'status']);
 });
 
 //    user pannel
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 // Route::get('/', [UserController::class, 'home']);
-// Route::get('view-category/{cat_id}', [UserController::class, 'viewcategory']);
-
+Route::get('home1', [UserController::class, 'home1']);
+Route::get('view-category/{cat_id}', [UserController::class, 'view']);
 Route::middleware(['auth'])->group(function () {
     // cart
     Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');

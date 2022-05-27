@@ -5,8 +5,7 @@ label.btn.btn-default.active.toggle-off {
     background-color: #dc3545;
 }
 </style>
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-
+<!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script> -->
 <div class="container">
 
     <div class="card">
@@ -23,7 +22,7 @@ label.btn.btn-default.active.toggle-off {
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addproduct">
         Add Category
     </button>
-    <!--Add Category Modal -->
+    <!-- Add Category Modal -->
     <div class="modal fade" id="addproduct" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -57,7 +56,6 @@ label.btn.btn-default.active.toggle-off {
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
@@ -79,24 +77,24 @@ label.btn.btn-default.active.toggle-off {
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($category as $item)
+                    @foreach ($category as $cate)
                     <tr>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->name }}</td>
-                        <td>{{ $item->description }}</td>
+                        <td>{{ $cate->id }}</td>
+                        <td>{{ $cate->name }}</td>
+                        <td>{{ $cate->description }}</td>
                         <td>
-                            <img src="{{ asset('uploads/products/'.$item->image) }}" width="70px" height="70px"
+                            <img src="{{ asset('uploads/products/'.$cate->image) }}" width="70px" height="70px"
                                 alt="Image">
                         </td>
                         <td>
-                            <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-toggle="toggle"
-                                data-on="Active" data-off="Deactivate" {{ $item->status ? 'checked' : '' }}>
+                            <input data-id="{{$cate->id}}" class="toggle-class" type="checkbox" data-toggle="toggle"
+                                data-on="Active" data-off="Deactivate" {{ $cate->status ? 'checked' : '' }}>
                         </td>
                         <td> <button type="button" class="btn btn-info" data-bs-toggle="modal"
-                                data-bs-target="#editmodel{{$item->id}}"> edit </button>
+                                data-bs-target="#editmodel{{$cate->id}}"> edit </button>
 
                             <!-- edit category popup model -->
-                            <div class="modal fade" id="editmodel{{$item->id}}" tabindex="-1"
+                            <div class="modal fade" id="editmodel{{$cate->id}}" tabindex="-1"
                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
@@ -107,21 +105,21 @@ label.btn.btn-default.active.toggle-off {
                                         </div>
 
                                         <div class="modal-body">
-                                            <form action="update-product/{{$item->id}}" method="POST"
+                                            <form action="update-product/{{$cate->id}}" method="POST"
                                                 enctype="multipart/form-data">
                                                 @csrf
 
-                                                <input type="hidden" value="{{ $item-> id}}">
+                                                <input type="hidden" value="{{ $cate-> id}}">
                                                 <div class="form-group mb-3">
                                                     <label for="">Category Name</label>
-                                                    <input type="text" name="name" value="{{$item->name}}"
+                                                    <input type="text" name="name" value="{{$cate->name}}"
                                                         class="form-control">
                                                     <span class="text-danger">@error('name') {{$message}}
                                                         @enderror</span><br><br>
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <label for="">Description</label>
-                                                    <input type="text" name="description" value="{{$item->description}}"
+                                                    <input type="text" name="description" value="{{$cate->description}}"
                                                         class="form-control">
                                                     <span class="text-danger">@error('description') {{$message}}
                                                         @enderror</span><br><br>
@@ -129,7 +127,7 @@ label.btn.btn-default.active.toggle-off {
                                                 <div class="form-group mb-3">
                                                     <label for="">Product Image</label>
                                                     <input type="file" name="image" class="form-control">
-                                                    <img src="{{ asset('uploads/products/'.$item->image) }}"
+                                                    <img src="{{ asset('uploads/products/'.$cate->image) }}"
                                                         width="70px" height="70px" alt="Image">
                                                     <span class="text-danger">@error('image') {{$message}}
                                                         @enderror</span><br><br>
@@ -149,7 +147,7 @@ label.btn.btn-default.active.toggle-off {
                         </td>
 
                         <td>
-                            <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{{ url('delete-product/'.$cate->id) }}" class="btn btn-danger btn-sm">Delete</a>
                         </td>
                     </tr>
                     @endforeach
@@ -159,9 +157,8 @@ label.btn.btn-default.active.toggle-off {
     </div>
 </div>
 
-
-
 @endsection
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
@@ -174,7 +171,7 @@ $(function() {
         $.ajax({
             type: "GET",
             dataType: "json",
-            url: '/changeStatus',
+            url: "/Status",
             data: {
                 'status': status,
                 'id': id
@@ -186,7 +183,7 @@ $(function() {
     })
 })
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 $(function() {
     $("#btnSubmit").click(function() {
         var name = $("#name").val();
@@ -201,4 +198,4 @@ $(function() {
         }
     });
 });
-</script>
+</script> -->
