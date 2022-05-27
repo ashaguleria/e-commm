@@ -81,4 +81,11 @@ class CategoryController extends Controller
         return back()->with('success', 'Post deleted successfully');
 
     }
+
+    public function view($id)
+    {
+        $category = Category::find($id);
+        // dd($category);
+        return view('Admin.view-category', compact('category'));
+    }
 }

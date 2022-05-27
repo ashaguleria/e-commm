@@ -60,7 +60,7 @@ label.btn.btn-default.active.toggle-off {
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form> -->
-                            <a href="" class="btn btn-warning btn-sm">View</a>
+                            <a href=" {{ url('view-product/'.$item->id) }}" class="btn btn-warning btn-sm">View</a>
                         </td>
 
                     </tr>

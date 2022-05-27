@@ -97,7 +97,7 @@ label.btn.btn-default.active.toggle-off {
                                 data-bs-target="#editmodel{{$cate->id}}"> edit </button>
 
                             <a href="{{ url('delete-product/'.$cate->id) }}" class="btn btn-danger btn-sm">Delete</a>
-                            <a href="" class="btn btn-warning btn-sm">view</a>
+                            <a href="{{ url('view-category/'.$cate->id) }}" class="btn btn-warning btn-sm">view</a>
                         </td>
                     </tr>
 

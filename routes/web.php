@@ -37,6 +37,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-product/{id}', [ProductController::class, 'update']);
     Route::get('delete-product/{id}', [ProductController::class, 'destroy']);
     Route::get('changeStatus', [ProductController::class, 'changeStatus']);
+    Route::get('view-product/{id}', [ProductController::class, 'view']);
 
     Route::get('user', [ProductController::class, 'user']);
 
@@ -48,6 +49,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('update-product/{id}', [CategoryController::class, 'update']);
     Route::get('delete-product/{id}', [CategoryController::class, 'destroy']);
     Route::get('product', [CategoryController::class, 'status']);
+    Route::get('view-category/{id}', [CategoryController::class, 'view']);
 });
 
 //    user pannel

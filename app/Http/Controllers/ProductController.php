@@ -118,5 +118,12 @@ class ProductController extends Controller
         $product->save();
         return response()->json(['success' => 'Status change successfully.']);
     }
+//--------------view Detail-----------//
+    public function view($id)
+    {
+        $product = Product::find($id);
+        // dd($category);
+        return view('Admin.view-product', compact('product'));
+    }
 
 }
