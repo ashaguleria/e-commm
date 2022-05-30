@@ -46,10 +46,12 @@ class HomeController extends Controller
         return view('adminHome')->with($data);
     }
 
-    // public function adminHome()
+    // public function adminHome(Request $request)
     // {
-    //     $product = Product::paginate(5);
-    //     return view('adminHome', compact('product'));
+    //     $search = $request->input('search');
+
+    //     $product = Product::($search)->paginate(5);
+    //     return view('adminHome')->with('product', $product);
     // }
 
     public function main()

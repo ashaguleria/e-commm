@@ -67,7 +67,9 @@ label.btn.btn-default.active.toggle-off {
                         </td>
                         <td>
                             <a href="{{ url('edit-product/'.$item->id) }}" class="btn btn-primary btn-sm">Edit</a>
+
                             <a href=" {{ url('view-product/'.$item->id) }}" class="btn btn-primary btn-sm">View</a>
+
                             <form action="{{ url('delete-product/'.$item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

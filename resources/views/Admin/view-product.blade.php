@@ -32,7 +32,14 @@
                         <h5><b> Description:</b> {{$product->description}}</h5>
                         <h4><b> Orignal Price:</b> Rs {{$product->orignalprice}}</h4>
                         <h4><b> Price:</b> Rs {{$product->price}}</h4><br><BR>
+
+                        if($search = " "){
+                        <a href="{{url('admin/home?search')}}" class="btn btn-primary btn-center">Back</a>
+                        }
+                        else
+                        {
                         <a href="{{url('admin/home')}}" class="btn btn-primary btn-center">Back</a>
+                        }
                     </div>
 
                 </div>
