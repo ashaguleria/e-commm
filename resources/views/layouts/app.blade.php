@@ -15,6 +15,22 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
+        integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
+        integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
+    </script>
+    <!-- jQuery Custom Scroller CDN -->
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
+    </script>
+
 </head>
 <style>
 .w3-bar-item:hover {
@@ -24,7 +40,8 @@
 
 button.w3-bar-item.w3-button.w3-large {
     margin-left: 79%;
-    background-color: cadetblue;
+    background-color: #9dbdd9;
+
 }
 
 div#mySidebar {
@@ -39,15 +56,32 @@ div#mySidebar {
 </style>
 
 <body>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <link href="{{ asset('css/w3.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <div class="w3-sidebar w3-bar-block w3-card " style="width:18%" id="mySidebar">
         <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">&#9776;</button>
         <hr><br>
 
-        <a href="{{ url('categoryproduct') }}" class="w3-bar-item w3-button"><i class="fa fa-list-alt"></i> Category</a>
-        <a href=" {{ url('admin/home') }}" class="w3-bar-item w3-button"><i class="fa fa-product-hunt"></i> Product</a>
+        <a href="#homeSubmenu" class="w3-bar-item w3-button dropdown-toggle" data-toggle="collapse"
+            aria-expanded="false"><i class="fa fa-list-alt" aria-hidden="true"></i> Category </a>
+        <ul class="collapse list-unstyled" id="homeSubmenu">
+            <li style="margin-left: 10%;">
+                <a href="{{url('categoryproduct')}}" class="w3-bar-item w3-button"><i
+                        class='fa fa-angle-double-right'></i> Category </a>
+            </li>
+        </ul>
+
+        <a href="#productSubmenu" class="w3-bar-item w3-button dropdown-toggle" data-toggle="collapse"
+            aria-expanded="false"><i class="fa fa-product-hunt"></i> Product</a>
+        <ul class="collapse list-unstyled" id="productSubmenu">
+            <li style="margin-left: 10%;">
+                <a href=" {{ url('admin/home') }}" class="w3-bar-item w3-button"><i
+                        class='fa fa-angle-double-right'></i> Product </a>
+            </li>
+        </ul>
+
         <a href="{{ url('user') }}" class="w3-bar-item w3-button"><i class="fa fa-user fa-lg"></i> User</a>
         <a href="{{ url('adminorder') }}" class="w3-bar-item w3-button"><i class="fa fa-first-order"></i> Orders</a>
     </div>
@@ -101,13 +135,11 @@ div#mySidebar {
                         </div>
                     </div>
                 </nav>
-
                 <main class="py-4">
                     @yield('content')
                 </main>
             </div>
         </div>
-
     </div>
 
     <script>
@@ -116,7 +148,6 @@ div#mySidebar {
         document.getElementById("mySidebar").style.width = "18%";
         document.getElementById("mySidebar").style.display = "block";
         document.getElementById("openNav").style.display = "none";
-
     }
 
     function w3_close() {
@@ -125,6 +156,9 @@ div#mySidebar {
         document.getElementById("openNav").style.display = "inline-block";
     }
     </script>
+
+
+
 
 </body>
 

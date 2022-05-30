@@ -74,9 +74,8 @@ label.btn.btn-default.active.toggle-off {
                         <th>Name</th>
                         <th>Description</th>
                         <th>Image</th>
-                        <th>Status</th>
+                        <!-- <th>Status</th> -->
                         <th>Action</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -89,15 +88,15 @@ label.btn.btn-default.active.toggle-off {
                             <img src="{{ asset('uploads/products/'.$cate->image) }}" width="70px" height="70px"
                                 alt="Image">
                         </td>
-                        <td>
+                        <!-- <td>
                             <input data-id="{{$cate->id}}" class="toggle-class" type="checkbox" data-toggle="toggle"
                                 data-on="Active" data-off="Deactivate" {{ $cate->status ? 'checked' : '' }}>
-                        </td>
-                        <td> <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
+                        </td> -->
+                        <td> <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#editmodel{{$cate->id}}"> edit </button>
 
-                            <a href="{{ url('delete-product/'.$cate->id) }}" class="btn btn-danger btn-sm">Delete</a>
-                            <a href="{{ url('view-category/'.$cate->id) }}" class="btn btn-warning btn-sm">view</a>
+                            <a href="{{ url('delete-product/'.$cate->id) }}" class="btn btn-primary btn-sm">Delete</a>
+                            <a href="{{ url('view-category/'.$cate->id) }}" class="btn btn-primary btn-sm">view</a>
                         </td>
                     </tr>
 
@@ -160,7 +159,7 @@ label.btn.btn-default.active.toggle-off {
 
 @endsection
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 <script>
@@ -183,7 +182,7 @@ $(function() {
         });
     })
 })
-</script>
+</script> -->
 <script type="text/javascript">
 $(function() {
     $("#btnSubmit").click(function() {

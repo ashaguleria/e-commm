@@ -39,6 +39,11 @@
                         <span class="text-danger">@error('name') {{$message}} @enderror</span><br><br>
                     </div>
                     <div class="form-group mb-3">
+                        <label for="">Product Orignal Price</label>
+                        <input type="text" name="orignalprice" value="{{old('orignalprice')}}" class="form-control">
+                        <span class="text-danger">@error('orignalprice') {{$message}} @enderror</span><br><br>
+                    </div>
+                    <div class="form-group mb-3">
                         <label for="">Product Price</label>
                         <input type="text" name="price" value="{{old('price')}}" class="form-control">
                         <span class="text-danger">@error('price') {{$message}} @enderror</span><br><br>

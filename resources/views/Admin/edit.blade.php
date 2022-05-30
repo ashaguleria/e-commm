@@ -31,13 +31,18 @@
                     <label for="">Product Name</label>
                     <input type="text" name="name" class="form-control" value="{{$product->name}}">
                     <span class="text-danger">@error('name') {{$message}} @enderror</span><br><br>
-
                 </div>
+
+                <div class="form-group mb-3">
+                    <label for="">Product Orignal Price</label>
+                    <input type="text" name="orignalprice" class="form-control" value="{{$product->orignalprice}}">
+                    <span class="text-danger">@error('orignalprice') {{$message}} @enderror</span><br><br>
+                </div>
+
                 <div class="form-group mb-3">
                     <label for="">Product Price</label>
                     <input type="text" name="price" class="form-control" value="{{$product->price}}">
                     <span class="text-danger">@error('price') {{$message}} @enderror</span><br><br>
-
                 </div>
 
                 <div class="form-group mb-3">

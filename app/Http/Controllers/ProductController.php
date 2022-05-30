@@ -34,6 +34,7 @@ class ProductController extends Controller
         $request->validate([
             'cat_id' => 'required',
             'name' => 'required',
+            'orignalprice' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
             'product_image' => 'required',
@@ -42,6 +43,7 @@ class ProductController extends Controller
         $product = new Product;
         $product->cat_id = $request->input('cat_id');
         $product->name = $request->input('name');
+        $product->orignalprice = $request->input('orignalprice');
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         if ($request->hasfile('product_image')) {
@@ -51,6 +53,7 @@ class ProductController extends Controller
             $file->move('uploads/products/', $filename);
             $product->product_image = $filename;
         }
+        // dd($product);
         $product->save();
         return redirect('admin/home')->with('status', 'save data');
     }
@@ -66,11 +69,13 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required',
+            'orignalprice' => 'required',
             'price' => 'required|numeric',
             'description' => 'required',
         ]);
         $product = Product::find($id);
         $product->name = $request->input('name');
+        $product->orignalprice = $request->input('orignalprice');
         $product->price = $request->input('price');
         $product->description = $request->input('description');
         if ($request->hasfile('product_image')) {

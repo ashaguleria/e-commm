@@ -3,7 +3,8 @@
 @section('content')
 <style>
 label.btn.btn-default.active.toggle-off {
-    background-color: red;
+    background-color: #e34b4b;
+
 }
 </style>
 <div class="container">
@@ -28,6 +29,7 @@ label.btn.btn-default.active.toggle-off {
                         <th>ID</th>
                         <th>Category</th>
                         <th>Name</th>
+                        <th>Orignal Price</th>
                         <th>Price</th>
                         <th>Description</th>
                         <th>Image</th>
@@ -41,6 +43,7 @@ label.btn.btn-default.active.toggle-off {
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->category->name }}</td>
                         <td>{{ $item->name }}</td>
+                        <td>Rs {{ $item->orignalprice}} </td>
                         <td>Rs {{ $item->price }} </td>
                         <td>{{ $item->description }}</td>
                         <td>
@@ -54,13 +57,13 @@ label.btn.btn-default.active.toggle-off {
                         <td>
                             <a href="{{ url('edit-product/'.$item->id) }}" class="btn btn-primary btn-sm">Edit</a>
 
-                            <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-danger btn-sm">Delete</a>
+                            <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-primary btn-sm">Delete</a>
                             <!-- <form action="{{ url('delete-product/'.$item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form> -->
-                            <a href=" {{ url('view-product/'.$item->id) }}" class="btn btn-warning btn-sm">View</a>
+                            <a href=" {{ url('view-product/'.$item->id) }}" class="btn btn-primary btn-sm">View</a>
                         </td>
 
                     </tr>
