@@ -12,15 +12,7 @@ use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
 {
-    // public function index()
-    // {
-    //     return view('index');
-    // }
-    // public function index()
-    // {
-    //     $product = Product::all();
-    //     return view('Admin.product', compact('product'));
-    // }
+    public $search;
 
     public function create()
     {
@@ -123,11 +115,12 @@ class ProductController extends Controller
         $product->save();
         return response()->json(['success' => 'Status change successfully.']);
     }
-//--------------view Detail-----------//
+
+    //--------------view Detail-----------//
     public function view($id)
     {
         $product = Product::find($id);
-        // dd($category);
+        // dd($product);
         return view('Admin.view-product', compact('product'));
     }
 

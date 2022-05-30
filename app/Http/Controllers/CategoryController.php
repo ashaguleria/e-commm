@@ -12,7 +12,7 @@ class CategoryController extends Controller
     //-------------- get data from database ------------//
     public function index()
     {
-        $category = Category::get();
+        $category = Category::paginate(10);
         return view('Admin.Categoryproduct', compact('category'));
     }
     //------------------Status Check------------------------//

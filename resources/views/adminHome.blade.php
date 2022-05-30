@@ -4,7 +4,6 @@
 <style>
 label.btn.btn-default.active.toggle-off {
     background-color: #e34b4b;
-
 }
 </style>
 <div class="container">
@@ -18,7 +17,19 @@ label.btn.btn-default.active.toggle-off {
             @endif
         </div>
     </div>
-    <a href="{{url('add-product')}}" class="btn btn-primary">Add Product</a>
+    <div class="row">
+        <div class="col-md-6">
+            <a href="{{url('add-product')}}" class="btn btn-primary">Add Product</a>
+        </div>
+        <div class="col-md-6">
+            <div class="search" style="float:right;">
+                <form action="">
+                    <input type="text" name="search" id="search" placeholder="Search..." value="{{ $search }}">
+                    <button class="btn btn-primary"><i class="fa fa-search search-button"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row justify-content-center">
 
         <div class="card-body">
@@ -56,22 +67,18 @@ label.btn.btn-default.active.toggle-off {
                         </td>
                         <td>
                             <a href="{{ url('edit-product/'.$item->id) }}" class="btn btn-primary btn-sm">Edit</a>
-
-                            <a href="{{ url('delete-product/'.$item->id) }}" class="btn btn-primary btn-sm">Delete</a>
-                            <!-- <form action="{{ url('delete-product/'.$item->id) }}" method="POST">
+                            <a href=" {{ url('view-product/'.$item->id) }}" class="btn btn-primary btn-sm">View</a>
+                            <form action="{{ url('delete-product/'.$item->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form> -->
-                            <a href=" {{ url('view-product/'.$item->id) }}" class="btn btn-primary btn-sm">View</a>
-                        </td>
+                                <button type="submit" class="btn btn-primary btn-sm">Delete</button>
+                            </form>
 
+                        </td>
                     </tr>
                     @endforeach
-
                 </tbody>
             </table>
-
         </div>
     </div>
 
@@ -81,6 +88,7 @@ label.btn.btn-default.active.toggle-off {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
 <script>
 $(function() {
     $('.toggle-class').change(function() {

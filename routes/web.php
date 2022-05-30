@@ -29,14 +29,14 @@ Auth::routes();
 
 Route::middleware(['auth'])->group(function () {
     Route::get('admin/home', [App\Http\Controllers\HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
-    // Route::get('index', [ProductController::class, 'index']);
 
     Route::get('add-product', [ProductController::class, 'create']);
     Route::post('add-product', [ProductController::class, 'store']);
     Route::get('edit-product/{id}', [ProductController::class, 'edit']);
     Route::put('update-product/{id}', [ProductController::class, 'update']);
-    Route::get('delete-product/{id}', [ProductController::class, 'destroy']);
+    Route::delete('delete-product/{id}', [ProductController::class, 'destroy']);
     Route::get('changeStatus', [ProductController::class, 'changeStatus']);
+
     Route::get('view-product/{id}', [ProductController::class, 'view']);
 
     Route::get('user', [ProductController::class, 'user']);

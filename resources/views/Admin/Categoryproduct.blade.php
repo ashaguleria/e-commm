@@ -153,6 +153,9 @@ label.btn.btn-default.active.toggle-off {
                     @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center">
+                {!! $category->links() !!}
+            </div>
         </div>
     </div>
 </div>

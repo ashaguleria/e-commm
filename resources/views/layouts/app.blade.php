@@ -15,21 +15,18 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
-    <!-- Popper.JS -->
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"
         integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous">
     </script>
-    <!-- Bootstrap JS -->
+
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
-    </script>
-    <!-- jQuery Custom Scroller CDN -->
-    <script
-        src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js">
-    </script>
+    </script>  -->
 
 </head>
 <style>
@@ -44,14 +41,36 @@ button.w3-bar-item.w3-button.w3-large {
 
 }
 
+button.w3-button {
+    color: white;
+}
+
+button.w3-bar-item.w3-button.w3-large {
+    margin-left: 79%;
+    background-color: #161718;
+}
+
+
 div#mySidebar {
-    background-color: #9dbdd9;
+    background-color: #161718;
+}
+
+a.w3-bar-item.w3-button {
+    color: white;
+}
+
+i.fa {
+    color: #2b6efd;
 }
 
 .w3-teal,
 .w3-hover-teal:hover {
     color: #fff !important;
-    background-color: cadetblue !important;
+    background-color: #161718 !important;
+}
+
+i.fa.fa-search.search-button {
+    color: white;
 }
 </style>
 
@@ -64,23 +83,43 @@ div#mySidebar {
         <button class="w3-bar-item w3-button w3-large" onclick="w3_close()">&#9776;</button>
         <hr><br>
 
-        <a href="#homeSubmenu" class="w3-bar-item w3-button dropdown-toggle" data-toggle="collapse"
+        <!-- <a href="#homeSubmenu" class="w3-bar-item w3-button dropdown-toggle" data-toggle="collapse"
             aria-expanded="false"><i class="fa fa-list-alt" aria-hidden="true"></i> Category </a>
         <ul class="collapse list-unstyled" id="homeSubmenu">
             <li style="margin-left: 10%;">
                 <a href="{{url('categoryproduct')}}" class="w3-bar-item w3-button"><i
                         class='fa fa-angle-double-right'></i> Category </a>
             </li>
-        </ul>
+        </ul> -->
+        <div class="w3-dropdown-hover">
+            <button class="w3-button"><i class="fa fa-list-alt" aria-hidden="true"></i> Category <i
+                    class="fa fa-caret-down" aria-hidden="true"></i> </button>
+            <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                <a href="{{url('categoryproduct')}}" class="w3-bar-item w3-button"> <i
+                        class='fa fa-angle-double-right'></i>
+                    All Category</a>
 
-        <a href="#productSubmenu" class="w3-bar-item w3-button dropdown-toggle" data-toggle="collapse"
+            </div>
+        </div>
+        <div class="w3-dropdown-hover">
+            <button class="w3-button"><i class="fa fa-product-hunt"></i> Product <i class="fa fa-caret-down"
+                    aria-hidden="true"></i> </button>
+            <div class="w3-dropdown-content w3-bar-block w3-card-4">
+                <a href="{{ url('admin/home') }}" class="w3-bar-item w3-button"> <i
+                        class='fa fa-angle-double-right'></i>
+                    All Product</a>
+
+            </div>
+        </div>
+
+        <!-- <a href="#productSubmenu" class="w3-bar-item w3-button dropdown-toggle" data-toggle="collapse"
             aria-expanded="false"><i class="fa fa-product-hunt"></i> Product</a>
         <ul class="collapse list-unstyled" id="productSubmenu">
             <li style="margin-left: 10%;">
                 <a href=" {{ url('admin/home') }}" class="w3-bar-item w3-button"><i
                         class='fa fa-angle-double-right'></i> Product </a>
             </li>
-        </ul>
+        </ul> -->
 
         <a href="{{ url('user') }}" class="w3-bar-item w3-button"><i class="fa fa-user fa-lg"></i> User</a>
         <a href="{{ url('adminorder') }}" class="w3-bar-item w3-button"><i class="fa fa-first-order"></i> Orders</a>
@@ -156,10 +195,6 @@ div#mySidebar {
         document.getElementById("openNav").style.display = "inline-block";
     }
     </script>
-
-
-
-
 </body>
 
 </html>

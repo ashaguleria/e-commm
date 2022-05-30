@@ -500,7 +500,7 @@ a {
 .w3-dropdown-content {
     cursor: auto;
     color: #000;
-    background-color: #fff;
+    background-color: #161718;
     display: none;
     position: absolute;
     min-width: 160px;
@@ -1633,7 +1633,7 @@ a {
 .w3-teal,
 .w3-hover-teal:hover {
     color: #fff !important;
-    background-color: #9dbdd9 !important;
+    background-color: #161718 !important;
 }
 
 .w3-yellow,

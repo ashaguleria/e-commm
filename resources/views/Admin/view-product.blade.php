@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
 <style>
 .product {
@@ -18,7 +17,6 @@
 
 <div class="container">
     <div class="row">
-
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-3 col-md-6 col-lg-4 ">
@@ -32,8 +30,11 @@
                         <h4><b>Category:<b> {{$product->category->name}}</h4>
                         <h4><b>Product:</b> {{$product->name}}</h4>
                         <h5><b> Description:</b> {{$product->description}}</h5>
-                        <h4><b> Price:</b> Rs {{$product->price}}</h4>
+                        <h4><b> Orignal Price:</b> Rs {{$product->orignalprice}}</h4>
+                        <h4><b> Price:</b> Rs {{$product->price}}</h4><br><BR>
+                        <a href="{{url('admin/home')}}" class="btn btn-primary btn-center">Back</a>
                     </div>
+
                 </div>
             </div>
         </div>

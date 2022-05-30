@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -32,11 +33,25 @@ class HomeController extends Controller
 
         return view('home', compact('products'));
     }
-    public function adminHome()
+    public function adminHome(Request $request)
     {
-        $product = Product::all();
-        return view('adminHome', compact('product'));
+        $search = $request['search'];
+        if ($search != "") {
+            $product = Product::where('name', 'LIKE', "%" . $search . "%")->get();
+        } else {
+            $product = Product::all();
+        }
+        // $product = Product::paginate(10);
+        $data = compact('product', 'search');
+        return view('adminHome')->with($data);
     }
+
+    // public function adminHome()
+    // {
+    //     $product = Product::paginate(5);
+    //     return view('adminHome', compact('product'));
+    // }
+
     public function main()
     {
         $cartItems = \Cart::getContent();

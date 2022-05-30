@@ -30,7 +30,8 @@
                 <div class="col-sm-9 col-md-6 col-lg-8 ">
                     <div class="product">
                         <h4><b>Product:</b> {{$category->name}}</h4>
-                        <h5><b> Description:</b> {{$category->description}}</h5>
+                        <h5><b> Description:</b> {{$category->description}}</h5><br><Br>
+                        <a href="{{url('categoryproduct')}}" class="btn btn-primary btn-back">Back</a>
                     </div>
                 </div>
             </div>
