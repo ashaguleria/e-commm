@@ -2,24 +2,11 @@
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\MailController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RelationshipController;
-use App\Http\Controllers\SoftDeleteController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
- */
 Route::get('/', function () {
     return view('home');
 });
@@ -36,7 +23,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-product/{id}', [ProductController::class, 'update']);
     Route::delete('delete-product/{id}', [ProductController::class, 'destroy']);
     Route::get('changeStatus', [ProductController::class, 'changeStatus']);
-
     Route::get('view-product/{id}', [ProductController::class, 'view']);
 
     Route::get('user', [ProductController::class, 'user']);
@@ -56,7 +42,9 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 // Route::get('/', [UserController::class, 'home']);
 Route::get('home1', [UserController::class, 'home1']);
-Route::get('view-category/{cat_id}', [UserController::class, 'view']);
+
+Route::get('view-subcategory/{cat_id}', [UserController::class, 'view']);
+
 Route::middleware(['auth'])->group(function () {
     // cart
     Route::get('cart', [CartController::class, 'cartList'])->name('cart.list');
@@ -74,25 +62,26 @@ Route::middleware(['auth'])->group(function () {
     Route::get('stripe', [StripeController::class, 'index']);
     Route::post('checkoutstripe', [StripeController::class, 'checkout']);
 });
-//Relationship
-Route::get('first', [RelationshipController::class, 'index']);
-Route::post('save', [RelationshipController::class, 'create']);
-Route::post('store', [RelationshipController::class, 'store']);
-Route::post('thirdpage', [RelationshipController::class, 'save']);
-
-// mail
-Route::get('mail', [MailController::class, 'send']);
-Route::post('/send-email', [MailController::class, 'index']);
-
-//javascript
-Route::get('create', [UserController::class, 'jquery']);
-
-//Softdelete
-Route::get('softdelete', [SoftDeleteController::class, 'index'])->name('post.index');
-Route::delete('softdelete/{id}', [SoftDeleteController::class, 'delete'])->name('post.delete');
 
 // Forget Password
 Route::get('forget-password', [ForgotPasswordController::class, 'ForgetPassword'])->name('ForgetPasswordGet');
 Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('ForgetPasswordPost');
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'ResetPassword'])->name('ResetPasswordGet');
 Route::post('reset-password', [ForgotPasswordController::class, 'ResetPasswordStore'])->name('ResetPasswordPost');
+
+//Relationship
+// Route::get('first', [RelationshipController::class, 'index']);
+// Route::post('save', [RelationshipController::class, 'create']);
+// Route::post('store', [RelationshipController::class, 'store']);
+// Route::post('thirdpage', [RelationshipController::class, 'save']);
+
+// mail
+// Route::get('mail', [MailController::class, 'send']);
+// Route::post('/send-email', [MailController::class, 'index']);
+
+//javascript
+// Route::get('create', [UserController::class, 'jquery']);
+
+//Softdelete
+// Route::get('softdelete', [SoftDeleteController::class, 'index'])->name('post.index');
+// Route::delete('softdelete/{id}', [SoftDeleteController::class, 'delete'])->name('post.delete');

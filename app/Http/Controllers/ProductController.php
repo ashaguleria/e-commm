@@ -107,6 +107,7 @@ class ProductController extends Controller
         $abc = abc::all();
         return view('Admin.adminorder', compact('abc'));
     }
+
     //--------------Change Status---------------//
     public function changeStatus(Request $request)
     {
@@ -119,7 +120,6 @@ class ProductController extends Controller
     //--------------view Detail-----------//
     public function view($id)
     {
-
         $product = Product::find($id);
         // dd($product);
         return view('Admin.view-product', compact('product'));

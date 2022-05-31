@@ -9,19 +9,11 @@ use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
-    // public function home()
-    // {
-
-    //     $products = Product::all();
-    //     return view('home', compact('products'));
-    // }
-
     public function index()
     {
         $products = DB::table('products')->select('*')->where('status', '1')->orderBy('id', 'asc')->get();
         return view('home', ['products' => $products]);
     }
-
     public function order()
     {
         return view('User.order');
@@ -45,16 +37,18 @@ class UserController extends Controller
         $abc->save();
         return redirect('stripe')->with('status', 'save data');
     }
-    // public function jquery()
-    // {
-    //     return view("jquery.create");
-    // }
 
     //get category
-    public function home1()
+    public function home1($cat_id)
     {
-        $category = Category::where('status', '1')->get();
+        $category = Category::all();
         return view('home1', compact('category'));
+    }
+    public function view($id)
+    {
+        $category = Category::find($id);
+        $products = Product::find($cat_id)->products;
+        return view('view-subcategory')->withcategory($category)->withproduct($products);
     }
 
 }

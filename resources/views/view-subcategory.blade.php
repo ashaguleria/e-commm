@@ -21,15 +21,7 @@
             <div class="container">
                 <span class="price"><b>Price:- {{$product->price}} Rs </b></span>
                 <p class="description"> {{$product->description}}</p>
-                <form action="{{ route('cart.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" value="{{ $product->id }}" name="id">
-                    <input type="hidden" value="{{ $product->name }}" name="name">
-                    <input type="hidden" value="{{ $product->price }}" name="price">
-                    <input type="hidden" value="{{ $product->product_image }}" name="image">
-                    <input type="hidden" value="1" name="quantity">
-                    <button class="btn btn-success">Add To Cart</button>
-                </form><br>
+                <br>
 
 
             </div>
