@@ -119,6 +119,7 @@ class ProductController extends Controller
     //--------------view Detail-----------//
     public function view($id)
     {
+
         $product = Product::find($id);
         // dd($product);
         return view('Admin.view-product', compact('product'));

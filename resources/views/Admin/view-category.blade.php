@@ -31,7 +31,7 @@
                     <div class="product">
                         <h4><b>Product:</b> {{$category->name}}</h4>
                         <h5><b> Description:</b> {{$category->description}}</h5><br><Br>
-                        <a href="{{url('categoryproduct')}}" class="btn btn-primary btn-back">Back</a>
+                        <a href="{{ url()->previous() }}" class="btn btn-primary btn-center">Back</a>
                     </div>
                 </div>
             </div>
