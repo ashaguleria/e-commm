@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DB;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -42,4 +43,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public static function getusers()
+    {
+
+        $result = DB::table('Users')
+            ->select('id', 'name', 'email')
+            ->where('is_admin', 'user')
+            ->orderBy('id', 'asc')
+            ->get();
+        return $result;
+    }
 }

@@ -2,6 +2,7 @@
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ImportController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\UserController;
@@ -38,6 +39,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('view-category/{id}', [CategoryController::class, 'view']);
 });
 
+Route::get('import', [ImportController::class, 'importview']);
+Route::get('export', 'ImportExportController@export')->name('export');
+Route::get('importExportView', 'ImportExportController@importExportView');
+Route::post('import', 'ImportExportController@import')->name('import');
+
 //    user pannel
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 // Route::get('/', [UserController::class, 'home']);
@@ -54,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
 
     //order
     Route::get('order', [UserController::class, 'order']);
-    Route::get('order/{id}', [UserController::class, 'product']);
+
     Route::POST('order', [UserController::class, 'store']);
 
     //Payment
@@ -68,19 +74,8 @@ Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPassword
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'ResetPassword'])->name('ResetPasswordGet');
 Route::post('reset-password', [ForgotPasswordController::class, 'ResetPasswordStore'])->name('ResetPasswordPost');
 
-//Relationship
-// Route::get('first', [RelationshipController::class, 'index']);
-// Route::post('save', [RelationshipController::class, 'create']);
-// Route::post('store', [RelationshipController::class, 'store']);
-// Route::post('thirdpage', [RelationshipController::class, 'save']);
+Route::get('/export-csv', [ImportController::class, 'export']);
+Route::get('/export-excel', [ImportController::class, 'export1']);
 
-// mail
-// Route::get('mail', [MailController::class, 'send']);
-// Route::post('/send-email', [MailController::class, 'index']);
-
-//javascript
-// Route::get('create', [UserController::class, 'jquery']);
-
-//Softdelete
-// Route::get('softdelete', [SoftDeleteController::class, 'index'])->name('post.index');
-// Route::delete('softdelete/{id}', [SoftDeleteController::class, 'delete'])->name('post.delete');
+Route::get('/sendgrid', [ImportController::class, 'sendgrid']);
+Route::get('/sendgrid1', [ImportController::class, 'sendgrid1']);

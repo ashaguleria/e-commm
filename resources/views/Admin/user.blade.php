@@ -4,6 +4,8 @@
     <div class="card">
         <div class="card-header">{{ __('User') }}</div>
     </div>
+    <h2 class="float-right"><a href="{{url('export-excel')}}" class="btn btn-success">Export CSV</a></h2>
+
     <div class="row justify-content-center">
         <div class="card-body">
             <table class="table table-bordered table-striped">

@@ -18,11 +18,6 @@ class UserController extends Controller
     {
         return view('User.order');
     }
-    public function product($id)
-    {
-        $product = Product::find($id);
-        return view('User.order', compact('product'));
-    }
 // orders save
     public function store(Request $request)
     {
@@ -32,7 +27,6 @@ class UserController extends Controller
         $abc->email = $request->email;
         $abc->phone = $request->phone;
         $abc->address = $request->address;
-        $abc->product_id = $request->product_id;
 
         $abc->save();
         return redirect('stripe')->with('status', 'save data');
