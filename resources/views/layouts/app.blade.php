@@ -47,12 +47,14 @@ button.w3-button {
 
 button.w3-bar-item.w3-button.w3-large {
     margin-left: 79%;
-    background-color: #161718;
+    background-color: #282c30;
+
 }
 
 
 div#mySidebar {
-    background-color: #161718;
+    background-color: #282c30;
+
 }
 
 a.w3-bar-item.w3-button {

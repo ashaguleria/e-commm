@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h3 class="header">{{ __('Add Product') }}</h3>
+    <h3 class="header">{{ __($category->name) }}</h3>
     <div class="row">
         <div class="card-body">
             @if ($message = Session::get('success'))
@@ -12,14 +12,16 @@
             </div>
             @endif
         </div>
-        @foreach($products as $product)
+
+        @foreach($product as $product)
         <div class="col-sm-4">
             <img src="{{ asset('uploads/products/'.$product->product_image) }}" height="250" width="250" /><br><br>
             <div class="container">
                 <h3 class="product"> {{$product->name}}</h3>
             </div><br>
             <div class="container">
-                <span class="price"><b>Price:- {{$product->price}} Rs </b></span>
+                <span class="price"><b>Price:- {{$product->price}} Rs </b></span><span class="orignal_price"><s>Rs
+                        {{$product->orignalprice}}</s></span>
                 <p class="description"> {{$product->description}}</p>
                 <br>
 

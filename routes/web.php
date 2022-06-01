@@ -42,8 +42,7 @@ Route::middleware(['auth'])->group(function () {
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 // Route::get('/', [UserController::class, 'home']);
 Route::get('home1', [UserController::class, 'home1']);
-
-Route::get('view-subcategory/{cat_id}', [UserController::class, 'view']);
+Route::get('view-subcategory/{name}', [UserController::class, 'view']);
 
 Route::middleware(['auth'])->group(function () {
     // cart
@@ -62,7 +61,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('stripe', [StripeController::class, 'index']);
     Route::post('checkoutstripe', [StripeController::class, 'checkout']);
 });
-
+Route::get('mail', [MailController::class, 'mail']);
 // Forget Password
 Route::get('forget-password', [ForgotPasswordController::class, 'ForgetPassword'])->name('ForgetPasswordGet');
 Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPasswordStore'])->name('ForgetPasswordPost');

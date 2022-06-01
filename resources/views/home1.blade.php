@@ -14,7 +14,7 @@
         </div>
         @foreach($category as $product)
         <div class="col-sm-4">
-            <a href="{{url('view-subcategory/'.$product->cat_id)}}">
+            <a href="{{url('view-subcategory/'.$product->name)}}">
                 <img src="{{ asset('uploads/products/'.$product->image) }}" height="250" width="250" /><br><br>
                 <div class="container">
                     <h3 class="product"> {{$product->name}}</h3>

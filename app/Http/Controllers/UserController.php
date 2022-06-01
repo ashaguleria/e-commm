@@ -39,16 +39,20 @@ class UserController extends Controller
     }
 
     //get category
-    public function home1($cat_id)
+    public function home1()
     {
         $category = Category::all();
         return view('home1', compact('category'));
     }
-    public function view($id)
+    public function view($name)
     {
-        $category = Category::find($id);
-        $products = Product::find($cat_id)->products;
-        return view('view-subcategory')->withcategory($category)->withproduct($products);
+        if (Category::where('name', $name)->exists()) {
+            $category = Category::where('name', $name)->first();
+            $product = Product::where('cat_id', $category->id)->get();
+            return view('view-subcategory', compact('category', 'product'));
+        } else {
+            return view('home1');
+        }
     }
 
 }
