@@ -9,12 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 class abc extends Model
 {
     use HasFactory;
+    public $table = "abcs";
+    protected $fillable = ['name', 'email', 'phone', 'address'];
+
     public static function getusers()
     {
-
-        $result = DB::table('abcs')
+        $abc = DB::table('abcs')
             ->select('*')
+        // ->whereBetween('created_at', [])
             ->get();
-        return $result;
+        return $abc;
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\abc;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
@@ -11,9 +10,24 @@ class abcExport implements FromCollection, WithHeadings
     /**
      * @return \Illuminate\Support\Collection
      */
-    public function collection()
+    // protected $dateForm;
+    // protected $dateTo;
+    // public function __construct($dateForm, $dateTo)
+    // {
+    //     $this->dateForm = $dateForm;
+    //     $this->dateTo = $dateTo;
+    // }
+
+    protected $data;
+    public function __construct($data)
     {
-        return abc::all();
+        $this->data = $data;
+    }
+
+    public function Collection()
+    {
+        return collect($this->data);
+
     }
     public function headings(): array
     {
@@ -23,6 +37,8 @@ class abcExport implements FromCollection, WithHeadings
             'email',
             'phone',
             'address',
+            'created_at',
+            'updated_at',
 
         ];
     }

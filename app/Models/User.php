@@ -45,7 +45,6 @@ class User extends Authenticatable
     ];
     public static function getusers()
     {
-
         $result = DB::table('Users')
             ->select('id', 'name', 'email')
             ->where('is_admin', 'user')

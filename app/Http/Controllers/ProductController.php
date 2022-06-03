@@ -102,9 +102,17 @@ class ProductController extends Controller
     }
 
     //--------------------Oredres-------//
-    public function order()
+    public function order(Request $request)
     {
-        $abc = abc::all();
+        if(!empty($request->fromdate) && !empty($request->todate)) {        
+            $abc = abc::where('created_at', '>=', $request->fromdate)->where('created_at', '<=', $request->todate)->get();
+        } elseif(!empty($request->fromdate)) {
+            $abc = abc::where('created_at', '>=', $request->fromdate)->get();
+        }elseif(!empty($request->todate)){
+            $abc = abc::where('created_at', '<=', $request->todate)->get();
+        }else{
+           $abc = abc::all();
+        }
         return view('Admin.adminorder', compact('abc'));
     }
 
@@ -124,5 +132,4 @@ class ProductController extends Controller
         // dd($product);
         return view('Admin.view-product', compact('product'));
     }
-
 }

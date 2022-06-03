@@ -41,6 +41,7 @@ class HomeController extends Controller
         } else {
             $product = Product::all();
         }
+
         // $product = Product::paginate(10);
         $data = compact('product', 'search');
         return view('adminHome')->with($data);

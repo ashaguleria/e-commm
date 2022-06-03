@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\abc;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
@@ -29,7 +30,7 @@ class UserController extends Controller
         $abc->address = $request->address;
 
         $abc->save();
-        return redirect('stripe')->with('status', 'save data');
+        return redirect('order')->with('status', 'save data');
     }
 
     //get category

@@ -29,7 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('user', [ProductController::class, 'user']);
 
     Route::get('adminorder', [ProductController::class, 'order']);
+    Route::POST('/adminorder', [ProductController::class, 'order']);
 
+    // Route::POST('/export-csv', [ImportController::class, 'export']);
     //category
     Route::Post('add-category', [CategoryController::class, 'store']);
     Route::get('categoryproduct', [CategoryController::class, 'index']);
@@ -38,11 +40,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('product', [CategoryController::class, 'status']);
     Route::get('view-category/{id}', [CategoryController::class, 'view']);
 });
-
-Route::get('import', [ImportController::class, 'importview']);
-Route::get('export', 'ImportExportController@export')->name('export');
-Route::get('importExportView', 'ImportExportController@importExportView');
-Route::post('import', 'ImportExportController@import')->name('import');
 
 //    user pannel
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
@@ -60,7 +57,6 @@ Route::middleware(['auth'])->group(function () {
 
     //order
     Route::get('order', [UserController::class, 'order']);
-
     Route::POST('order', [UserController::class, 'store']);
 
     //Payment
@@ -74,8 +70,18 @@ Route::post('forget-password', [ForgotPasswordController::class, 'ForgetPassword
 Route::get('reset-password/{token}', [ForgotPasswordController::class, 'ResetPassword'])->name('ResetPasswordGet');
 Route::post('reset-password', [ForgotPasswordController::class, 'ResetPasswordStore'])->name('ResetPasswordPost');
 
-Route::get('/export-csv', [ImportController::class, 'export']);
-Route::get('/export-excel', [ImportController::class, 'export1']);
+Route::post('/import', [ImportController::class, 'import']);
 
 Route::get('/sendgrid', [ImportController::class, 'sendgrid']);
 Route::get('/sendgrid1', [ImportController::class, 'sendgrid1']);
+
+Route::get('/Datesearch', [ImportController::class, 'search']);
+Route::post('/Datesearch', [ImportController::class, 'search']);
+
+// Route::get('exportcsv', [ImportController::class, 'exportcsv']);
+
+Route::get('/export', [ImportController::class, 'export']);
+Route::POST('/export', [ImportController::class, 'export']);
+
+Route::get('download', [ImportController::class, 'download']);
+Route::get('generate-pdf', [ImportController::class, 'generatePdf']);

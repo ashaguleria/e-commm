@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Exports\abcExport;
-use App\Exports\UsersExport;
+use App\Imports\abcImport;
+use App\Models\abc;
+use DB;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
 use SendGrid;
 use SendGrid\Mail\From;
 use SendGrid\Mail\Mail;
@@ -13,68 +17,59 @@ use SendGrid\Mail\To;
 
 class ImportController extends Controller
 {
-    public function importview()
-    {
-        return view("import");
-    }
-    // public function import()
-    // {
-    //     Excel::import(new BulkImport, request()->file('file'));
 
-    //     return back();
-    // }
-    public function export()
+// ------------Generate PDF-----------------
+    public function download()
     {
-        return Excel::download(new abcExport, 'abc-csv.csv');
+        $abc = abc::all();
+        return view('Admin.download', compact('abc'));
     }
-    public function export1()
+    public function generatePdf()
     {
-        return Excel::download(new UsersExport, 'user-csv.csv');
+        $abc = abc::all();
+        $pdf = PDF::loadView('Admin.download', compact('abc'));
+        return $pdf->download('abc.pdf');
+        return back();
+    }
+    //-----------end pdf generator------------//
+
+    ////---------------export CSV-------------//
+    public function export(Request $request)
+    {
+        $FromDate = $request->FromDate;
+        $ToDate = $request->ToDate;
+        // dd($request->all());
+       if (!empty($request->FromDate) && !empty($request->ToDate)) {
+                $abcs = abc::where('created_at', '>=', $FromDate)->where('created_at', '<=', $ToDate)->get();
+                // dd($abcs);
+                return Excel::download(new abcExport($abcs), 'users.xlsx');
+            } elseif(!empty($request->FromDate)) {
+                $abcs = abc::where('created_at', '>=', $FromDate)->get();
+                return Excel::download(new abcExport($abcs), 'users.xlsx');
+                // dd($abcs);
+            }elseif(!empty($request->ToDate)){
+                $abcs = abc::where('created_at', '<=', $ToDate)->get();
+                return Excel::download(new abcExport($abcs), 'users.xlsx');
+            }else{
+                return redirect()->back();
+            }
     }
 
-    // public function sendgrid()
-    // {
+    ///-------------------IMPORT CSV FILE------------///
+    public function import()
+    {
+        Excel::import(new abcImport, request()->file('file'));
+        return redirect()->back()->with('success', 'Data Imported Successfully');
+    }
 
-    //     $sendgrid_apikey = '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';
-    //     $sendgrid = new SendGrid($sendgrid_apikey);
-    //     $url = 'https://api.sendgrid.com/';
-    //     $pass = $sendgrid_apikey;
-    //     $template_id = 'd-df36cdc8a3cd432f9abe0d5a5fb0df38';
-    //     $js = array(
-    //         'sub' => array(':name' => array('Elmer')),
-    //         'filters' => array('templates' => array('settings' => array('enable' => 1, 'template_id' => $template_id))),
-    //     );
-    //     echo json_encode($js);
-    //     $params = array(
-    //         'to' => "sharma.rajat877@gmail.com",
-    //         'toname' => "Elmer Thomas",
-    //         'from' => "rajat.weproinc@gmail.com",
-    //         'fromname' => "FirstAidGuru",
-    //         'subject' => "PHP Test",
-    //         'text' => "I'm text!",
-    //         'html' => "<strong>I'm HTML!</strong>",
-    //         'x-smtpapi' => json_encode($js),
-    //     );
-    //     $request = $url . 'api/mail.send.json';
-    //     $session = curl_init($request);
-    //     curl_setopt($session, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
-    //     curl_setopt($session, CURLOPT_HTTPHEADER, array('Authorization: Bearer ' . $sendgrid_apikey));
-    //     curl_setopt($session, CURLOPT_POST, true);
-    //     curl_setopt($session, CURLOPT_POSTFIELDS, $params);
-    //     curl_setopt($session, CURLOPT_HEADER, false);
-    //     curl_setopt($session, CURLOPT_RETURNTRANSFER, true);
-    //     $response = curl_exec($session);
-    //     curl_close($session);
-    //     print_r($response);
-    // }
+    //--------------SEND GRID----------------//
 
     public function sendgrid1()
     {
         $from = new from("rajat.weproinc@gmail.com", "Example User");
-
         $tos = [
             new To(
-                "sharma.rajat877@gmail.com",
+                "rajat.weproinc@gmail.com",
                 "Example User1",
                 [
                     'subject' => 'Subject 1',
@@ -82,10 +77,11 @@ class ImportController extends Controller
                     'location' => 'Liverpool',
                     'course_date' => '2022-06-01',
                     'price' => '₤ 126',
+                    'seat' => '12',
                     'payment_status' => 'Succeeded',
+                    'location_url' => 'https://maps.google.com/?q=london',
                 ]
             ),
-
         ];
 
         $subject = new subject("This Is Dummy Text");
@@ -109,4 +105,5 @@ class ImportController extends Controller
         }
 
     }
+
 }
